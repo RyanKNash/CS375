@@ -1,0 +1,38 @@
+img {
+    max-width: 450px;
+}
+
+marquee {
+    color: brown;
+    font: 2em sans-serif;
+}
+
+figcaption {
+    color: purple;
+}
+
+body {
+    background-color: blue;
+}
+
+.netscape {
+    color: blueviolet;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 5em;
+}
+
+h1 {
+    color: greenyellow
+}
+
+a {
+    color: pink;
+}
+
+ul {
+    color: orange;
+}
+
+p {
+    color: red;
+}
