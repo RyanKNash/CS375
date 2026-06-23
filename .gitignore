@@ -36,6 +36,6 @@ Thumbs.db
 .parcel-cache/
 
 # Optional lock files (uncomment if you don't want to track them)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
