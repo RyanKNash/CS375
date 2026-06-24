@@ -3,8 +3,10 @@ img {
 }
 
 marquee {
-    color: brown;
-    font: 2em sans-serif;
+    font-size: 30px;
+    color: white;
+    background-color: red;
+    border: 5px solid yellow;
 }
 
 figcaption {
@@ -13,26 +15,57 @@ figcaption {
 
 body {
     background-color: blue;
+    text-align: center;
+    cursor: crosshair;
 }
 
 .netscape {
-    color: blueviolet;
+    color: darkorange;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 5em;
+    text-decoration: underline;
 }
 
 h1 {
     color: greenyellow
 }
 
-a {
-    color: pink;
+nav {
+    background-color: black;
+    border: 6px ridge hotpink;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: yellow;
+    background-color: blue;
+    padding: 8px;
+    margin: 8px;
+    border: 3px outset red;
+    font-size: 22px;
+    text-decoration: overline;
+}
+
+nav a:hover {
+    background-color: red;
+    color: white;
 }
 
 ul {
-    color: orange;
+    list-style-type: square;
+    display: inline-block;
+    text-align: left;
 }
 
 p {
     color: red;
+}
+
+li {
+    font-size: 22px;
+    background-color: rgba(255, 255, 255, 0.65);
+    border: 3px dotted orange;
+    padding: 10px;
+    margin: 15px;
 }
