@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOM</title>
+  <style>
+    div {
+      border: 1px solid black;
+      margin: 5px;
+      padding: 5px;
+    }
+    .foo {
+      width: 25px;
+      height: 25px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+
+<p id="p1">I am a paragraph</p>
+<p class="abc">I am another paragraph</p>
+<p class="abc" id="p3">I am a third paragraph</p>
+
+<div id="container">A
+  <div>B</div>
+  <div>C
+    <div>D</div>
+    <div>E</div>
+    <div>F
+      <div>G</div>
+    </div>
+  </div>
+</div>
+
+<button id="clicker">Click me</button>
+<div>Number of clicks: <span id="counter">0</span></div>
+
+<div id="appender">Append divs to me!</div>
+
+<script>
+
+/*
+- Write your JS under the problem it solves
+- You can only add JS to this script tag
+- Do NOT modify the HTML
+- You may NOT use the function document.getElementsByTagName
+*/
+
+// 1) With a single line of JS: Make the text color of the element with id p3 red.
+document
+// 2) Make all elements with class abc have a green background color and a pink border. (Normally you'd set this with CSS in the document's <style>, but we'll do this to practice our JS).
+
+// 3) With a single line of JS: Modify the div with text E so its text instead says "I'm a div".
+
+// 4) When the button with id clicker is clicked, increment the number of clicks inside the span with id counter (1, 2, ...).
+let count = 0;
+let button = document.getElementById("clicker");
+let counter = document.getElementById("counter");
+function onClick(event) {
+  count++;
+  counter.textContent = count;
+}
+button.addEventListener("clicker", onClick);
+
+
+// 5) After 1.5 seconds, change the div with text A to have a 5px wide pink border.
+setTimeout(function () {
+  do stuff;
+}, 1500);
+
+// 6) When the button with id clicker is clicked, start an interval which appends a new div with the text "Hey" to the div with id appender every half second. For example, when the button is clicked, after 3s, appender should contain 6 child divs, all with the text "Hey".
+
+</script>
+
+</body>
+</html>
