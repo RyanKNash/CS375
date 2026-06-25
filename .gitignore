@@ -1,4 +1,4 @@
-# Dependencies
+.DS_Store# Dependencies
 node_modules/
 
 # Package manager logs
