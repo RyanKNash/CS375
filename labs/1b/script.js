@@ -1,17 +1,21 @@
 //Q1
 function sumDiagonals(arr, row, col) {
     let sum = 0;
+    let diagonals = [];
 
-    if (row <= 0 || row > arr.length || col <= 0 || col > arr[0].length) {
-        let diagonals = [
-            [row - 1, col - 1],
-            [row - 1, col + 1],
-            [row + 1, col - 1],
-            [row + 1, col + 1],
-        ];
-    } else {
+    if (row >= 0 && row < arr.length && col >= 0 && 
+        col < arr[0].length) { 
+        continue;
+        } else {
         return(console.log("Out of bounds"));
     }
+    let diagonals = [
+        [row - 1, col - 1],
+        [row - 1, col + 1],
+        [row + 1, col - 1],
+        [row + 1, col + 1],
+    ];
+
 
     for (let [r, c] of diagonals) {
         if (r >= 0 && r < arr.length && c >= 0 && c < arr[0].length) {
