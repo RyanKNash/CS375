@@ -23,4 +23,17 @@ function sumDiagonals(arr, row, col) {
 //sumDiagonals(arr, 0, 0)
 
 //Q2
-function copyInc(arr) {}
+function copyInc(arr) {
+    let result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        result[i] = [];
+        for (let j = 0; j < arr[i].length; j++) {
+            result[i][j] = arr[i][j] + 1;
+        }
+    }
+
+    return result;
+}
+
+console.log(copyInc([[1,2,3],[4,5,6],[7,8,9]]));
