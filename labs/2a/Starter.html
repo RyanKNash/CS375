@@ -6,7 +6,17 @@
 
     <title>Starter</title>
     <style type="text/css">
-      /* TODO */
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 20px;
+      }
     </style>
   </head>
   <body data-new-gr-c-s-check-loaded="14.1307.0" data-gr-ext-installed="">
@@ -43,16 +53,33 @@
       const start = document.getElementById("start");
       const stop = document.getElementById("stop");
 
-      function renderGrid() {
-        let html = "";
+      function createTable() {
         for (let i = 0; i < numberGrid.length; i++) {
-          html += "<tr>";
+          const row = document.createElement("tr");
+
           for (let j = 0; j < numberGrid[i].length; j++) {
-            html += "<td>" + numberGrid[i][j] + "</td>";
+            const cell = document.createElement("td");
+            cell.textContent = numberGrid[i][j];
+            row.appendChild(cell);
           }
-          html += "</tr>";
+
+          numberGridBody.appendChild(row);
         }
-        numberGridBody.innerHTML = html;
+      }
+
+      incrementButton.addEventListener("click", function () {
+        incrementGrid();
+        updateTable();
+      });
+
+      function updateTable() {
+        const rows = numberGridBody.rows;
+
+        for (let i = 0; i < numberGrid.length; i++) {
+          for (let j = 0; j < numberGrid[i].length; j++) {
+            rows[i].cells[j].textContent = numberGrid[i][j];
+          }
+        }
       }
 
       function startCount() {
@@ -77,7 +104,7 @@
       start.addEventListener("click", startCount);
       stop.addEventListener("click", stopCount);
 
-      renderGrid();
+      createTable();
     </script>
   </body>
 </html>
