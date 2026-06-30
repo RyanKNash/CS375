@@ -49,10 +49,13 @@
 */
 
 // 1) With a single line of JS: Make the text color of the element with id p3 red.
-document
+document.getElementById("p3").style.color = "red";
+
 // 2) Make all elements with class abc have a green background color and a pink border. (Normally you'd set this with CSS in the document's <style>, but we'll do this to practice our JS).
+document.querySelectorAll(".abc").forEach(el => { el.style.backgroundColor = "green"; el.style.border = "1px solid pink"; });
 
 // 3) With a single line of JS: Modify the div with text E so its text instead says "I'm a div".
+document.querySelectorAll("div").forEach(d => d.textContent === "E" && (d.textContent = "I'm a div"));
 
 // 4) When the button with id clicker is clicked, increment the number of clicks inside the span with id counter (1, 2, ...).
 let count = 0;
@@ -62,16 +65,13 @@ function onClick(event) {
   count++;
   counter.textContent = count;
 }
-button.addEventListener("clicker", onClick);
-
+button.addEventListener("click", onClick);
 
 // 5) After 1.5 seconds, change the div with text A to have a 5px wide pink border.
-setTimeout(function () {
-  do stuff;
-}, 1500);
+setTimeout(() => document.querySelectorAll("div").forEach(d => d.textContent === "A" && (d.style.border = "5px solid pink")), 1500);
 
 // 6) When the button with id clicker is clicked, start an interval which appends a new div with the text "Hey" to the div with id appender every half second. For example, when the button is clicked, after 3s, appender should contain 6 child divs, all with the text "Hey".
-
+document.getElementById("clicker").addEventListener("click", () => setInterval(() => document.getElementById("appender").appendChild(Object.assign(document.createElement("div"), { textContent: "Hey" })), 500));
 </script>
 
 </body>
