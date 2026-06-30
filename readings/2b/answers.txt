@@ -1,0 +1,54 @@
+1)
+Protocol: https
+
+Domain: catalog.drexel.edu
+    Third-level domain (subdomain): catalog
+    Second-level domain: drexel
+    Top-level domain (TLD): edu
+
+Route (path): /undergraduate/collegeofcomputingandinformatics/computerscience/
+
+Port: 443 (default HTTPS port; not explicitly specified in the URL)
+
+2)
+a: GET
+   A GET request asks the server to retrieve a resource.
+
+b: /foo/bar
+   Whatever file is mapped to foo/bar will likely be served.
+   If the site is static, it could be foo/bar.html.
+   If it's a web app, the route may be handled by the server.  
+
+c: The User-Agent header identifies the client making the request.
+   In this case, it indicates the request came from Firefox 105.0 running on macOS 10.15.
+
+d: The Accept-Language header tells the server the user's preferred language.
+   In this case, en-US (US English), with a fallback of any other English.
+
+e: No
+   GET requests typically do not include a request body because they are only requesting data, 
+   not sending data to the server.
+
+3)
+a: 200 OK
+b: The server is sending the request as plain text.
+
+4) A web page is made up of many separate files, not just one HTML document. 
+The browser sends additional HTTP requests to download CSS, JavaScript, images, 
+fonts, and other resources needed to render and operate the page.
+
+5)
+a: Both receive the same response from the server - HTTP/1.1 200 OK. 
+The browser renders the response as a web page, curl prints the raw response to the terminal.
+
+b: The browser sends many more headers than curl - User-Agent, Accept, 
+Accept-Language and Accept-Encoding among them. The curl request is much simpler, 
+it only sent the essential headers - Host and User-Agent.
+
+6)
+The server is programmed to respond identically to every request. It ignores the route, 
+so all URLs return the same content. Real web servers use routing to send different responses for different paths.
+
+7)
+The curl returned the same response, except the Content-Type header. 
+The browser rendered the tags as a web page rather than just displaying them as plain text.
