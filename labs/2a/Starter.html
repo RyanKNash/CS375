@@ -1,0 +1,83 @@
+<!doctype html>
+<!-- saved from url=(0080)https://www.cs.drexel.edu/~nkl43/cs375/labs/2a_client_side_js_hof0e/starter.html -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Starter</title>
+    <style type="text/css">
+      /* TODO */
+    </style>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1307.0" data-gr-ext-installed="">
+    <div id="count-container">0</div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <table>
+      <tbody id="number-grid"></tbody>
+    </table>
+
+    <button id="increment">Increment</button>
+
+    <script type="text/javascript">
+      let numberGrid = [
+        [1, 2, 3],
+        [4, 5, 6],
+      ];
+
+      function incrementGrid() {
+        // don't modify this function
+        for (let i = 0; i < numberGrid.length; i++) {
+          for (let j = 0; j < numberGrid[0].length; j++) {
+            numberGrid[i][j]++;
+          }
+        }
+      }
+
+      let count = 0;
+      let gridCount = 0;
+      let intervalId = null;
+      const countContainer = document.getElementById("count-container");
+      const numberGridBody = document.getElementById("number-grid");
+      const incrementButton = document.getElementById("increment");
+      const start = document.getElementById("start");
+      const stop = document.getElementById("stop");
+
+      function renderGrid() {
+        let html = "";
+        for (let i = 0; i < numberGrid.length; i++) {
+          html += "<tr>";
+          for (let j = 0; j < numberGrid[i].length; j++) {
+            html += "<td>" + numberGrid[i][j] + "</td>";
+          }
+          html += "</tr>";
+        }
+        numberGridBody.innerHTML = html;
+      }
+
+      function startCount() {
+        if (intervalId !== null) {
+          return;
+        }
+
+        count++;
+        countContainer.textContent = count;
+
+        intervalId = setInterval(function () {
+          count++;
+          countContainer.textContent = count;
+        }, 500);
+      }
+
+      function stopCount() {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+
+      start.addEventListener("click", startCount);
+      stop.addEventListener("click", stopCount);
+
+      renderGrid();
+    </script>
+  </body>
+</html>
