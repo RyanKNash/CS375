@@ -30,3 +30,52 @@ Q2)
     like request/response interceptors.
 
 Q3)
+a)
+#1 (Client requested /data) - fires when the client's fetch("/data?zip=...") hits the server route,
+right when the handler starts. First to print, in the server terminal.
+
+#4: (Request sent to API) - fires synchronously right after axios(url) is called (before it 
+resolves), so it prints immediately after #1, before #2/#3, in the server terminal.
+
+#2 (API response received) - fires when the axios promise resolves successfully; prints after 1 and
+4, in the server terminal.
+
+#3 (Error when requesting from API) - fires instead of #2 if the axios call rejects (e.g. bad 
+zip/key); also after #1 and #4, in the server terminal.
+
+#5 (http://localhost:3000) - fires once, when app.listen starts the server (before any request is 
+made), in the server terminal.
+
+#10 (Sent request GET /data) - fires synchronously right after the button click, immediately after 
+the fetch(...) chain is kicked off (before any response arrives), in the browser console.
+
+#6 (Received response headers) - fires when the fetch promise resolves with the response object, 
+after #10, in the browser console.
+
+#7 (Received response body) and #8 (the body itself) - fire together right after #6, once 
+response.json() resolves, in the browser console.
+
+#9 (error) - only fires if something goes wrong in the fetch chain (network failure or bad JSON); 
+doesn't fire on the normal happy path, in the browser console.
+
+b)
+The client passes the zip code as a query string parameter on the URL (/data?zip=${zip}), which the 
+server reads via req.query.zip.
+
+c)
+the server builds a URL with the zip and API key as query parameters (?zip=${zip}&appid=${apiKey}) 
+and sends that as a GET request via axios.
+
+d)
+res.json automatically sets the Content-Type: application/json header and serializes the JS object 
+into a JSON string, so the client's response.json() call works correctly; res.send doesn't guarantee
+that behavior for objects.
+
+e)
+Because res.json(data) is placed right after the (asynchronous) axios(...).then().catch() call 
+rather than inside it, it runs synchronously immediately — before the axios promise has resolved or
+rejected. That means data is still its initial value, {}, when it's sent to the client, so the 
+client always receives an empty object, regardless of whether the API call succeeds or fails. If the
+API call does later fail, res.status(500).json({}) will try to send a second response after
+the first has already gone out, which will throw a "headers already sent" error and crash/error 
+out that request on the server.
