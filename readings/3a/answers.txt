@@ -1,0 +1,100 @@
+Q1)
+curl http://localhost:3000/hey
+Prediction: Yo (in app.get)
+Actual: Yo
+
+curl -X POST http://localhost:3000/hey
+Prediction: What's up? (in app.post)
+Actual: What's up?
+
+curl http://localhost:3000/foo/index.html
+Prediction: Foobar (in app.get)
+Actual:
+
+curl -X POST http://localhost:3000/foo/index.html
+Prediction: An error, there is no foo/index.html
+Actual: An error, but as HTML text:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot POST /foo/index.html</pre>
+</body>
+</html>
+
+curl http://localhost:3000/index.html
+Prediction: Cannot GET /index.html
+Actual: The HTML that shows my prediction in a browser
+
+curl http://localhost:3000/abc/1234
+Prediction: Cannot GET /abc/1234
+Actual: The HTML that shows my prediction in a browser
+
+curl http://localhost:3000/abc/123/def
+Prediction: Cannot GET /abc/123/def
+Actual: The HTML that shows my prediction in a browser
+
+Q2)
+a) Route the root of a folder to index.html, if one exists in the folder. 
+   server.js has no linkage to the CSS; a GET request to the CSS would fix this.
+
+b) The site is now loading from the public folder, which has HTML linked to CSS.
+So there's a background color now.
+   The script hits app.use first, checks that location, and uses the files there, not the 
+built in app.get in server.js.
+
+Q3)
+a) The script just has count set to 1, with no code to update it.
+
+let count = 0;
+app.get("/count", (req, res) => {
+  count = count + 1;
+  res.send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Index</title>
+  <link	rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <p>This URL has been visited ${count} times.</p>
+</body>
+</html>`);
+});
+
+b) Because the page contains dynamic content that changes on every request.
+
+c) Static sites are simply the pre-written content of the files, exactly as they are stored on the server. 
+Dynamic sites generate or modify content on the server in response to a request.
+Dynamic sites can display personalized content, track information, read and write to databases, handle login and authentication, etc.
+
+Q4)
+app.post("/bubbles", (req, res) => {
+    if (req.body && req.body.hasOwnProperty("fizzy")) {
+    res.send(req.body.fizzy + "abc");
+  } else {
+    res.send("Where is fizzy?");
+  }
+});
+
+
+
+curl -X POST http://localhost:3000/bubbles
+
+Where is fizzy?
+
+curl -X POST http://localhost:3000/bubbles \
+-H "Content-Type: application/json" \
+-d '{"fizzy":77}'
+
+77abc
+
+curl -X POST http://localhost:3000/bubbles \
+-H "Content-Type: application/json" \
+-d '{"abc":123}'
+
+Where is fizzy?

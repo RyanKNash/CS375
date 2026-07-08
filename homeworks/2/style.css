@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#controls {
+  margin-bottom: 12px;
+}
+
+button {
+  margin-right: 6px;
+  padding: 6px 12px;
+}
+
+#board {
+  border-collapse: collapse;
+}
+
+#board td {
+  border: 1px solid #cccccc;
+  height: 20px;
+  width: 20px;
+}
+
+#board .dead {
+  background-color: white;
+}
+
+#board .alive {
+  background-color: #e02fed;
+}
