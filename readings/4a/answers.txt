@@ -1,0 +1,32 @@
+Q1)
+{
+  "location": "Perkasie, PA",
+  "current": {
+    "temperature": 74.9,
+    "condition": "partly_cloudy",
+    "condition_text": "Partly sunny"
+  },
+  "date": "2026-07-08"
+}
+
+Q2)
+    a. API keys let providers identify who's making requests so they can track usage, 
+    enforce rate limits, bill for paid tiers, and revoke access for abuse without keys, 
+    they'd have no way to control or monitor who's using their service.
+
+    b. You'll get a 401 Unauthorized response, with a JSON body containing an error message like 
+    {"cod": 401, "message": "Invalid API key"}.
+
+    c. Keeping keys in a separate file (like .env) rather than hardcoding them means you can exclude
+    that file from version control (e.g., via .gitignore), so you don't accidentally leak secret
+    credentials when you push code to a public repo like GitHub.
+
+    d. If the client made the request directly, your API key would be visible in the browser's 
+    network tab or page source; routing through your server keeps the key hidden and also lets you
+    control what data gets exposed to the client.
+
+    e. Fetch is a built-in browser API that requires a couple extra steps, Axios is a third-party
+    library that automatically parses JSON, throws errors on bad status codes, and offers extras
+    like request/response interceptors.
+
+Q3)
