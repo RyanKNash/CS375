@@ -34,3 +34,12 @@ app.get("/", (req, res) => {
   </body>
 </html>`);
 });
+
+app.post("/data", (req, res) => {
+    console.log("Body:", req.body);
+    res.send("Data received");
+});
+
+app.listen(port, hostname, () => {
+    console.log(`http://${hostname}:${port}`);
+});

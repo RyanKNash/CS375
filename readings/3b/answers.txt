@@ -1,1 +1,48 @@
 Q1)
+    a, b, c)
+        1	http://localhost:3000 - Server terminal
+        2	Page loaded - Browser console.
+        3	Request sent - Browser console
+        4	Body: { secret: 'applesauce' } - Server terminal
+        5	Status: 200 - 	Browser console	
+        6	Body: Data received - 	Browser console
+
+Q2)
+    Access to fetch at 'file:///E:/a-cool-route' from origin 'null' has been...
+
+    When we visit localhost the page is being served by Express.
+    When we double click there is no Express server involved, so the browser cannot reach the route.
+
+Q3)
+app.post("/rate", (req, res) => {
+    const { recipe } = req.body;
+
+    if (!Array.isArray(recipe)) {
+        return res.status(400).json({});
+    }
+
+    const tooManyIngredients = recipe.length >= 3;
+    return res.json({ tooManyIngredients });
+});
+
+Q4)
+<script>
+document.getElementById("clicker").addEventListener("click", () => {
+  fetch("/data", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: "Hello world" }),
+  })
+    .then(response => {
+      return response.text();
+    })
+    .then(body => {
+      console.log(body);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+</script>
