@@ -30,6 +30,11 @@ function sendSummaryPage(response) {
       <head>
         <meta charset="utf-8">
         <title>Device Energy Usage</title>
+        <style>
+          table {
+            border: 2px solid black;
+          }
+        </style>
       </head>
       <body>
         <table>
