@@ -1,0 +1,70 @@
+### Valid POST #1
+POST http://localhost:3000/api/abc
+Content-Type: application/json
+
+{
+    "energy-usage": 506
+}
+
+### Valid POST #2
+POST http://localhost:3000/api/42
+Content-Type: application/json
+
+{
+    "energy-usage": 23
+}
+
+### Valid POST #3
+POST http://localhost:3000/api/42
+Content-Type: application/json
+
+{
+    "energy-usage": 17
+}
+
+### Valid POST #4
+POST http://localhost:3000/api/abc
+Content-Type: application/json
+
+{
+    "energy-usage": 47
+}
+
+### Valid POST #5
+POST http://localhost:3000/api/abc
+Content-Type: application/json
+
+{
+    "energy-usage": 108
+}
+
+### Valid POST #6 (Should turn row red)
+POST http://localhost:3000/api/xyzzy
+Content-Type: application/json
+
+{
+    "energy-usage": 5000
+}
+
+### Add one more to abc (total = 1001, should also turn red)
+POST http://localhost:3000/api/abc
+Content-Type: application/json
+
+{
+    "energy-usage": 340
+}
+
+### Get abc
+GET http://localhost:3000/api/abc
+
+### Get 42
+GET http://localhost:3000/api/42
+
+### Get xyzzy
+GET http://localhost:3000/api/xyzzy
+
+### Invalid device
+GET http://localhost:3000/api/foobar
+
+### View HTML table
+GET http://localhost:3000/

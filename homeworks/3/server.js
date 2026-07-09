@@ -26,22 +26,22 @@ function sendSummaryPage(response) {
   }).join("\n");
 
   const html = `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Device Energy Usage</title>
-  </head>
-  <body>
-    <table>
-      <thead>
-        <tr><th>Device ID</th><th>Energy Usage</th></tr>
-      </thead>
-      <tbody>
-${rows}
-      </tbody>
-    </table>
-  </body>
-</html>`;
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Device Energy Usage</title>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr><th>Device ID</th><th>Energy Usage</th></tr>
+          </thead>
+          <tbody>
+    ${rows}
+          </tbody>
+        </table>
+      </body>
+    </html>`;
 
   response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
   response.end(html);
@@ -115,9 +115,9 @@ const server = http.createServer(async (request, response) => {
   if (request.method === "GET") {
     const readings = energyUsageByDevice.get(deviceId);
     if (!readings) {
-      sendJson(response, 400, { error: "No data reported for this device" });
+      sendJson(response, 404, { error: "Device Not Found" });
       return;
-    }
+  }
 
     sendJson(response, 200, { "total-energy-usage": readings });
     return;
