@@ -33,6 +33,11 @@ function sendSummaryPage(response) {
         <style>
           table {
             border: 2px solid black;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid black;
+            padding: 8px;
           }
         </style>
       </head>
