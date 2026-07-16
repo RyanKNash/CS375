@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Weather</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 2rem;
+      }
+      #error {
+        color: #b00020;
+        min-height: 1.25rem;
+      }
+      table {
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      th,
+      td {
+        border: 1px solid #575757;
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+      th {
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Five Day Forecast</h1>
+    <form id="weather-form">
+      <label for="zip">Zip code</label>
+      <input id="zip" type="text" inputmode="numeric" required />
+      <br />
+      <br />
+      <button type="submit">Send request</button>
+    </form>
+
+    <p id="error" role="alert"></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Zip code</th>
+          <th>Feels like (&deg;F)</th>
+        </tr>
+      </thead>
+      <tbody id="temperatures"></tbody>
+    </table>
+
+    <script>
+      let zipInput = document.getElementById("zip");
+      let form = document.getElementById("weather-form");
+      let errorMessage = document.getElementById("error");
+      let temperatures = document.getElementById("temperatures");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorMessage.textContent = "";
+
+        try {
+          let lat = await fetch(`/`);
+          let response = await fetch(
+            `/feels-like?zip=${encodeURIComponent(zipInput.value.trim())}`,
+          );
+          let body = await response.json();
+
+          if (!response.ok) {
+            errorMessage.textContent = body.error || "Something went wrong";
+            return;
+          }
+
+          let row = document.createElement("tr");
+          let zipCell = document.createElement("td");
+          let temperatureCell = document.createElement("td");
+          zipCell.textContent = body.zip;
+          temperatureCell.textContent = body["feels-like-fahrenheit"];
+          row.append(zipCell, temperatureCell);
+          temperatures.appendChild(row);
+        } catch (error) {
+          errorMessage.textContent = "Something went wrong";
+        }
+      });
+    </script>
+  </body>
+</html>
