@@ -1,0 +1,11 @@
+1)
+ id | name | age | species 
+----+------+-----+---------
+  2 | Spot |   4 | dog
+(1 row)
+
+2d)
+   Because client-side validation can be bypassed. A user can disable JavaScript, 
+modify the page in their browser, or send requests directly to the server using tools like curl. 
+Server-side validation ensures that all incoming data is checked, regardless of how the request was made, 
+preventing invalid or malicious data from being processed.
