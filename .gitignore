@@ -1,5 +1,7 @@
 .DS_Store# Dependencies
 node_modules/
+*.env
+package.json
 
 # Package manager logs
 npm-debug.log*
@@ -10,6 +12,7 @@ pnpm-debug.log*
 # Environment variables
 .env
 .env.*
+env.json
 
 # Build/output directories
 dist/
