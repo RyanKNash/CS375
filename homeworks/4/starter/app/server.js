@@ -9,31 +9,33 @@ let hostname = "localhost";
 app.use(express.static("public"));
 // don't change code above this line
 
-app.get("/feels-like", async (req, res) => {
+app.get("/forecast", async (req, res) => {
   let zip = req.query.zip;
-
-  if (!zip) {
-    return res.status(400).json({ error: "Please enter a zip code" });
-  }
 
   try {
     let response = await axios.get(baseUrl, {
-      params: { zip: `${zip},us`, appid: apiKey },
+      params: { zip: zip, appid: apiKey },
     });
-    let feelsLikeKelvin = response.data.main.feels_like;
-    let feelsLikeFahrenheit = ((feelsLikeKelvin - 273.15) * 9) / 5 + 32;
 
     res.json({
-      zip: zip,
-      "feels-like-fahrenheit": Math.round(feelsLikeFahrenheit),
+      City: response.data.city.name,
+      forecasts: response.data.list.map((forecast) => ({
+        Date: forecast.dt_txt,
+        Forecast:
+          forecast.weather[0].description.charAt(0).toUpperCase() +
+          forecast.weather[0].description.slice(1),
+        Icon: forecast.weather[0].icon,
+        Temperature: parseFloat(
+          (((forecast.main.temp - 273.15) * 9) / 5 + 32).toFixed(1),
+        ),
+      })),
     });
   } catch (error) {
     console.error(error.message);
 
     if (error.response) {
-      let apiMessage = error.response.data && error.response.data.message;
-      return res.status(400).json({
-        error: apiMessage || "Could not retrieve weather data",
+      return res.status(error.response.status).json({
+        error: error.response.data.message,
       });
     }
 
